@@ -35,20 +35,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Conta",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person.fill" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="financial"
         options={{
           title: "Financeiro",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="money.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Conta",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person.fill" color={color} />
           ),
         }}
       />

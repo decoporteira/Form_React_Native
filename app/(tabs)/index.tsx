@@ -1,6 +1,6 @@
 import { Redirect } from "expo-router";
 import { useContext } from "react";
-import { Button, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { AuthContext } from "../../lib/auth";
 export default function HomeScreen() {
   const { token, loading, logout } = useContext(AuthContext);
@@ -32,8 +32,6 @@ export default function HomeScreen() {
         resizeMode="contain"
       ></Image>
       <Text style={{ color: "#000000" }}>Bem vindo</Text>
-
-      <Button title="Sair" onPress={logout} />
     </View>
   );
 }

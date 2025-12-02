@@ -11,7 +11,7 @@ const formatDateBR = (dateString: string) => {
 export default function ReportScreen() {
   const { token, loading: authLoading } = useContext(AuthContext);
 
-  const [student, setStudent] = useState([]);
+  const [student, setStudent] = useState({ name: "" });
   const [activities, setActivities] = useState([]);
   const [resume, setResume] = useState(null);
   const [numberOfAbsence, setNumberOfAbsence] = useState(0);
@@ -151,9 +151,7 @@ export default function ReportScreen() {
                 <Text
                   style={{
                     fontWeight: "bold",
-                    color: isDone
-                      ? "#1E90FF" /* azul */
-                      : "#FF4500" /* vermelho */,
+                    color: isDone ? "#1E90FF" : "#FF4500",
                   }}
                 >
                   Status: {activity.late}
