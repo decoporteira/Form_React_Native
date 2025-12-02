@@ -1,10 +1,22 @@
-import { Link } from "expo-router";
-import { useState } from "react";
-import { Alert, Button, Image, Text, TextInput, View } from "react-native";
-
+import { Redirect } from "expo-router";
+import { useContext } from "react";
+import { Button, Image, Text, View } from "react-native";
+import { AuthContext } from "../../lib/auth";
 export default function HomeScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { token, loading, logout } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Carregando...</Text>
+      </View>
+    );
+  }
+  if (!token) {
+    console.log("No token found, redirecting to login");
+    return <Redirect href="/login" />;
+  }
+
   return (
     <View
       style={{
@@ -20,48 +32,8 @@ export default function HomeScreen() {
         resizeMode="contain"
       ></Image>
       <Text style={{ color: "#000000" }}>Bem vindo</Text>
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Digite seu email"
-        style={{
-          width: "80%",
-          color: "#000000",
-          borderColor: "#000000",
-          borderWidth: 1,
-          borderBottomWidth: 1,
-          marginTop: 20,
-          borderRadius: 5,
-        }}
-      ></TextInput>
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Digite sua senha"
-        secureTextEntry
-        style={{
-          width: "80%",
-          color: "#000000",
-          borderColor: "#000000",
-          borderWidth: 1,
-          borderBottomWidth: 1,
-          marginTop: 20,
-          borderRadius: 5,
-        }}
-      ></TextInput>
-      <View style={{ marginTop: 20, width: "80%" }}>
-        <Button title="Log in" onPress={() => Alert.alert("clicou")} />
-      </View>
-      <Text style={{ color: "#000000", marginTop: 20 }}>
-        Não tem uma conta?{" "}
-        <Link href="/(tabs)/register" style={{ marginTop: 10 }}>
-          <Text style={{ color: "blue" }}>Cadastre-se</Text>
-        </Link>
-      </Text>
 
-      <Link href="/(tabs)/forgot" style={{ marginTop: 10 }}>
-        <Text style={{ color: "blue" }}>Esqueceu a senha?</Text>
-      </Link>
+      <Button title="Sair" onPress={logout} />
     </View>
   );
 }
